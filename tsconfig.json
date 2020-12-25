@@ -2,11 +2,11 @@
     "compilerOptions": {
         "target": "esnext",
         "module": "esnext",
-        "strict": true,
+        "strict": false,
         "declaration": true,
         "declarationDir": "dist",
         "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedParameters": false,
         "importHelpers": true,
         "moduleResolution": "node",
         "experimentalDecorators": true,

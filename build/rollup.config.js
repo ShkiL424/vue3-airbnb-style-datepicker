@@ -12,10 +12,11 @@ import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 
 // Get browserslist config and remove ie from es build targets
-const esbrowserslist = fs.readFileSync('./.browserslistrc')
+const esbrowserslist = fs
+  .readFileSync('./.browserslistrc')
   .toString()
   .split('\n')
-  .filter((entry) => entry && entry.substring(0, 2) !== 'ie');
+  .filter(entry => entry && entry.substring(0, 2) !== 'ie');
 
 const argv = minimist(process.argv.slice(2));
 
@@ -29,36 +30,35 @@ const baseConfig = {
         entries: [
           {
             find: '@',
-            replacement: `${path.resolve(projectRoot, 'src')}`,
-          },
+            replacement: `${path.resolve(projectRoot, 'src')}`
+          }
         ],
         customResolver: resolve({
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
-        }),
-      }),
+          extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
+        })
+      })
     ],
     replace: {
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify('production')
     },
-    vue: {
-    },
+    vue: {},
     postVue: [
       // Process only `<style module>` blocks.
       PostCSS({
         modules: {
-          generateScopedName: '[local]___[hash:base64:5]',
+          generateScopedName: '[local]___[hash:base64:5]'
         },
-        include: /&module=.*\.css$/,
+        include: /&module=.*\.scss$/
       }),
       // Process all `<style>` blocks except `<style module>`.
-      PostCSS({ include: /(?<!&module=.*)\.css$/ }),
+      PostCSS({ include: /(?<!&module=.*)\.scss$/ })
     ],
     babel: {
       exclude: 'node_modules/**',
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
-      babelHelpers: 'bundled',
-    },
-  },
+      babelHelpers: 'bundled'
+    }
+  }
 };
 
 // ESM/UMD/IIFE shared settings: externals
@@ -66,7 +66,7 @@ const baseConfig = {
 const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
-  'vue',
+  'vue'
 ];
 
 // UMD/IIFE shared settings: output.globals
@@ -74,7 +74,7 @@ const external = [
 const globals = {
   // Provide global variable names to replace your external imports
   // eg. jquery: '$'
-  vue: 'Vue',
+  vue: 'Vue'
 };
 
 // Customize configs for individual targets
@@ -87,7 +87,7 @@ if (!argv.format || argv.format === 'es') {
     output: {
       file: 'dist/vue3-airbnb-style-datepicker.esm.js',
       format: 'esm',
-      exports: 'named',
+      exports: 'named'
     },
     plugins: [
       replace(baseConfig.plugins.replace),
@@ -100,13 +100,13 @@ if (!argv.format || argv.format === 'es') {
           [
             '@babel/preset-env',
             {
-              targets: esbrowserslist,
-            },
-          ],
-        ],
+              targets: esbrowserslist
+            }
+          ]
+        ]
       }),
-      commonjs(),
-    ],
+      commonjs()
+    ]
   };
   buildFormats.push(esConfig);
 }
@@ -121,7 +121,7 @@ if (!argv.format || argv.format === 'cjs') {
       format: 'cjs',
       name: 'Vue3AirbnbStyleDatepicker',
       exports: 'auto',
-      globals,
+      globals
     },
     plugins: [
       replace(baseConfig.plugins.replace),
@@ -129,8 +129,8 @@ if (!argv.format || argv.format === 'cjs') {
       vue(baseConfig.plugins.vue),
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
-      commonjs(),
-    ],
+      commonjs()
+    ]
   };
   buildFormats.push(umdConfig);
 }
@@ -145,7 +145,7 @@ if (!argv.format || argv.format === 'iife') {
       format: 'iife',
       name: 'Vue3AirbnbStyleDatepicker',
       exports: 'auto',
-      globals,
+      globals
     },
     plugins: [
       replace(baseConfig.plugins.replace),
@@ -156,10 +156,10 @@ if (!argv.format || argv.format === 'iife') {
       commonjs(),
       terser({
         output: {
-          ecma: 5,
-        },
-      }),
-    ],
+          ecma: 5
+        }
+      })
+    ]
   };
   buildFormats.push(unpkgConfig);
 }
