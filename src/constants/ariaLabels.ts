@@ -1,7 +1,7 @@
 // interfaces
 import { AriaLabelsInterface } from '@/inrefaces';
 
-export const ariaLabels: AriaLabelsInterface = {
+export const ariaLabelsConfig: AriaLabelsInterface = {
   chooseDate: date => date,
   chooseStartDate: date => `Choose ${date} as your start date.`,
   chooseEndDate: date => `Choose ${date} as your end date.`,

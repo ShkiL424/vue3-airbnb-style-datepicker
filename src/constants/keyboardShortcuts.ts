@@ -1,7 +1,7 @@
 // interface
 import { KeyboardShortcutInterface } from '@/inrefaces';
 
-export const keyboardShortcuts: KeyboardShortcutInterface[] = [
+export const keyboardShortcutsConfig: KeyboardShortcutInterface[] = [
   {
     symbol: '↵',
     label: 'Select the date in focus',

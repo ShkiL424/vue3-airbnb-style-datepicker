@@ -1,7 +1,7 @@
 // interfaces
 import { ColoursInterface } from '@/inrefaces';
 
-export const colors: ColoursInterface = {
+export const colorsConfig: ColoursInterface = {
   selected: '#00a699',
   inRange: '#66e2da',
   selectedText: '#fff',

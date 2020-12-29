@@ -1,13 +1,13 @@
 <template>
-  <div class="app" :class="{'align-right': alignRight}">
+  <div class="app" :class="{ 'align-right': alignRight }">
     <h1>Examples</h1>
     <div class="buttons">
-      <button @click="toggleDatepickers">Hide datepickers</button>
+      <button @click="toggleDatePickers">Hide date pickers</button>
       <button @click="toggleAlign">Toggle alignment</button>
       <button @click="toggleTrigger">Toggle trigger</button>
     </div>
-    <div v-if="showDatepickers">
 
+    <div v-if="showDatePickers">
       <div class="datepicker-container with-input">
         <h3>Range datepicker with input</h3>
         <div class="datepicker-trigger">
@@ -16,7 +16,7 @@
             id="datepicker-input-trigger"
             :value="formatDates(inputDateOne, inputDateTwo)"
             placeholder="Select dates"
-          >
+          />
 
           <vue3-airbnb-style-datepicker
             :trigger-element-id="'datepicker-input-trigger'"
@@ -27,8 +27,16 @@
             :months-to-show="2"
             :show-action-buttons="true"
             :show-month-year-select="true"
-            @date-one-selected="val => { inputDateOne = val }"
-            @date-two-selected="val => { inputDateTwo = val }"
+            @date-one-selected="
+              val => {
+                inputDateOne = val;
+              }
+            "
+            @date-two-selected="
+              val => {
+                inputDateTwo = val;
+              }
+            "
           />
         </div>
       </div>
@@ -41,14 +49,18 @@
             id="datepicker-input-single-trigger"
             :value="formatDates(inputSingleDateOne)"
             placeholder="Select dates"
-          >
+          />
 
           <vue3-airbnb-style-datepicker
             :trigger-element-id="'datepicker-input-single-trigger'"
             :mode="'single'"
             :date-one="inputSingleDateOne"
             :date-two="inputSingleDateTwo"
-            @date-one-selected="val => { inputSingleDateOne = val }"
+            @date-one-selected="
+              val => {
+                inputSingleDateOne = val;
+              }
+            "
           />
         </div>
       </div>
@@ -56,7 +68,9 @@
       <div class="datepicker-container with-button">
         <h3>Range datepicker with button</h3>
         <div class="datepicker-trigger">
-          <button id="datepicker-button-trigger">{{ formatDates(buttonDateOne, buttonDateTwo) || 'Select dates' }}</button>
+          <button id="datepicker-button-trigger">
+            {{ formatDates(buttonDateOne, buttonDateTwo) || 'Select dates' }}
+          </button>
 
           <vue3-airbnb-style-datepicker
             :trigger-element-id="'datepicker-button-trigger'"
@@ -69,8 +83,17 @@
             :trigger="trigger"
             :offset-y="10"
             :close-after-select="true"
-            @date-one-selected="val => { buttonDateOne = val }"
-            @date-two-selected="val => { buttonDateTwo = val; trigger = false }"
+            @date-one-selected="
+              val => {
+                buttonDateOne = val;
+              }
+            "
+            @date-two-selected="
+              val => {
+                buttonDateTwo = val;
+                trigger = false;
+              }
+            "
           />
         </div>
       </div>
@@ -82,7 +105,7 @@
           :value="formatDates(inlineDateOne)"
           type="text"
           placeholder="Select date"
-        >
+        />
         <vue3-airbnb-style-datepicker
           :trigger-element-id="'datepicker-inline-trigger'"
           :mode="'single'"
@@ -91,8 +114,21 @@
           :date-one="inlineDateOne"
           :months-to-show="2"
           :disabled-dates="['2018-04-30', '2018-05-10', '2018-12-14']"
-          :customized-dates="[{ dates: ['2019-03-21', '2019-03-22', '2019-03-23', '2019-03-24'], cssClass: 'booked' }, { dates: ['2019-03-21', '2019-03-22', '2019-03-23', '2019-04-24'], cssClass: 'not-available' }]"
-          @date-one-selected="val => { inlineDateOne = val }"
+          :customized-dates="[
+            {
+              dates: ['2019-03-21', '2019-03-22', '2019-03-23', '2019-03-24'],
+              cssClass: 'booked'
+            },
+            {
+              dates: ['2019-03-21', '2019-03-22', '2019-03-23', '2019-04-24'],
+              cssClass: 'not-available'
+            }
+          ]"
+          @date-one-selected="
+            val => {
+              inlineDateOne = val;
+            }
+          "
         />
       </div>
 
@@ -103,7 +139,7 @@
           :value="formatDates(withDisabledDatesDateOne)"
           type="text"
           placeholder="Select date"
-        >
+        />
         <vue3-airbnb-style-datepicker
           :trigger-element-id="'datepicker-disabled-dates-trigger'"
           :mode="'single'"
@@ -111,14 +147,20 @@
           :date-one="withDisabledDatesDateOne"
           :months-to-show="2"
           :disabled-dates="disabledDates"
-          @date-one-selected="val => { withDisabledDatesDateOne = val }"
+          @date-one-selected="
+            val => {
+              withDisabledDatesDateOne = val;
+            }
+          "
         />
       </div>
 
       <div class="datepicker-container with-button">
         <h3>Test callback methods</h3>
         <div class="datepicker-trigger">
-          <button id="datepicker-callback-trigger">{{ formatDates(callbackDateOne, callbackDateTwo) || 'Select dates' }}</button>
+          <button id="datepicker-callback-trigger">
+            {{ formatDates(callbackDateOne, callbackDateTwo) || 'Select dates' }}
+          </button>
 
           <vue3-airbnb-style-datepicker
             :trigger-element-id="'datepicker-callback-trigger'"
@@ -128,8 +170,16 @@
             :fullscreen-mobile="true"
             :months-to-show="2"
             :offset-y="10"
-            @date-one-selected="val => { callbackDateOne = val }"
-            @date-two-selected="val => { callbackDateTwo = val }"
+            @date-one-selected="
+              val => {
+                callbackDateOne = val;
+              }
+            "
+            @date-two-selected="
+              val => {
+                callbackDateTwo = val;
+              }
+            "
             @apply="applyMethod"
             @closed="closedMethod"
             @cancelled="cancelledMethod"
@@ -144,84 +194,99 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import format from 'date-fns/format';
+import { defineComponent, onBeforeMount, ref, onMounted } from 'vue';
+import { format } from 'date-fns';
 
 import Vue3AirbnbStyleDatepicker from '@/App.vue';
-
 
 export default defineComponent({
   name: 'ServeDev',
   components: {
     Vue3AirbnbStyleDatepicker
   },
-  data() {
-    return {
-      dateFormat: 'YYYY-MM-DD', //'D MMM',
-      inputDateOne: '',
-      inputDateTwo: '',
-      inputSingleDateOne: '',
-      inputSingleDateTwo: '',
-      buttonDateOne: '',
-      buttonDateTwo: '',
-      inlineDateOne: '',
-      withDisabledDatesDateOne: '',
-      callbackDateOne: '',
-      callbackDateTwo: '',
-      sundayFirst: false,
-      alignRight: false,
-      showDatepickers: true,
-      trigger: false,
-    }
-  },
-  computed: {
-    disabledDates() {
-      return ['2018-12-30', '2018-12-10', '2018-12-14']
-    },
-  },
-  beforeMount() {
-    setTimeout(() => {
-      this.inputDateOne = '2019-01-12'
-      this.inputDateTwo = ''
-    }, 5000)
-  },
-  methods: {
-    formatDates(dateOne, dateTwo) {
-      let formattedDates = ''
+  setup() {
+    const disabledDates = ref(['2018-12-30', '2018-12-10', '2018-12-14']);
+    const dateFormat = ref('YYYY-MM-DD');
+    const inputDateOne = ref('');
+    const inputDateTwo = ref('');
+    const inputSingleDateOne = ref('');
+    const inputSingleDateTwo = ref('');
+    const buttonDateOne = ref('');
+    const buttonDateTwo = ref('');
+    const inlineDateOne = ref('');
+    const withDisabledDatesDateOne = ref('');
+    const callbackDateOne = ref('');
+    const callbackDateTwo = ref('');
+
+    const sundayFirst = ref(false);
+    const alignRight = ref(false);
+    const trigger = ref(false);
+    const showDatePickers = ref(true);
+
+    function formatDates(dateOne, dateTwo) {
+      let formattedDates = '';
       if (dateOne) {
-        formattedDates = format(dateOne, this.dateFormat)
+        formattedDates = format(dateOne, dateFormat.value);
       }
       if (dateTwo) {
-        formattedDates += ' - ' + format(dateTwo, this.dateFormat)
+        formattedDates += ' - ' + format(dateTwo, dateFormat.value);
       }
-      return formattedDates
-    },
-    toggleAlign() {
-      this.alignRight = !this.alignRight
-    },
-    toggleDatepickers() {
-      this.showDatepickers = !this.showDatepickers
-    },
-    toggleTrigger() {
-      this.trigger = !this.trigger
-    },
-    applyMethod() {
-      console.log('apply')
-    },
-    openedMethod() {
-      console.log('opened')
-    },
-    closedMethod() {
-      console.log('closed')
-      this.trigger = false
-    },
-    cancelledMethod() {
-      console.log('cancelled')
-    },
-    changeMonthMethod(visibleMonths) {
-      console.log('change months', visibleMonths)
-    },
-  },
+      return formattedDates;
+    }
+    function toggleAlign() {
+      alignRight.value = !alignRight.value;
+    }
+    function toggleDatePickers() {
+      showDatePickers.value = !showDatePickers.value;
+    }
+    function toggleTrigger() {
+      trigger.value = !trigger.value;
+    }
+    function applyMethod() {
+      console.log('apply');
+    }
+    function openedMethod() {
+      console.log('opened');
+    }
+    function closedMethod() {
+      console.log('closed');
+      trigger.value = false;
+    }
+    function cancelledMethod() {
+      console.log('cancelled');
+    }
+    function changeMonthMethod(visibleMonths) {
+      console.log('change months', visibleMonths);
+    }
+
+    return {
+      // reactive data
+      disabledDates,
+      inputDateOne,
+      inputDateTwo,
+      alignRight,
+      showDatePickers,
+      callbackDateOne,
+      callbackDateTwo,
+      inputSingleDateOne,
+      inputSingleDateTwo,
+      buttonDateOne,
+      buttonDateTwo,
+      inlineDateOne,
+      withDisabledDatesDateOne,
+      trigger,
+      // methods
+      toggleDatePickers,
+      toggleAlign,
+      toggleTrigger,
+      formatDates,
+      applyMethod,
+      closedMethod,
+      cancelledMethod,
+      openedMethod,
+      changeMonthMethod
+    };
+  }
 });
 </script>
 
@@ -230,8 +295,8 @@ html,
 body {
   min-height: 200vh;
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-  Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
   line-height: 18px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;

@@ -1,4 +1,4 @@
-export const monthNames: string[] = [
+export const monthNamesConfig: string[] = [
   'January',
   'February',
   'March',

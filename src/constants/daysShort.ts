@@ -1,4 +1,4 @@
-export const daysShort: string[] = [
+export const daysShortConfig: string[] = [
   'Mon',
   'Tue',
   'Wed',

@@ -1,7 +1,7 @@
 // interfaces
 import { KeysInterface } from '@/inrefaces/Keys.interface';
 
-export const keys: KeysInterface = {
+export const keysConfig: KeysInterface = {
   arrowDown: 40,
   arrowUp: 38,
   arrowRight: 39,
